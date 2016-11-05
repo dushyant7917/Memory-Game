@@ -12,9 +12,16 @@ mongo = PyMongo(app)
 @app.route('/')
 def index():
     if 'username' in session:
-        return 'You are logged in as ' + session['username']
+        return render_template('dashboard.html')
 
     return render_template('index.html')
+
+
+@app.route("/logout", methods = ['POST'])
+def logout():
+    session.clear()
+    return redirect(url_for('index'))
+
 
 @app.route('/login', methods = ['POST'])
 def login():
