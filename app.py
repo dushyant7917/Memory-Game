@@ -20,12 +20,9 @@ def index():
 
 @app.route("/logout", methods = ['POST'])
 def logout():
-    print "86878"
     current_score = request.form['current_score']
     current_level = request.form['current_level']
-    print "57578"
     users = mongo.db.users
-    print current_score + current_level
     users.update({'_id': session['username']}, {'$set': {'score': current_score, 'level': current_level}})
     session.clear()
     return redirect(url_for('index'))
