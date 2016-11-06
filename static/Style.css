@@ -26,7 +26,7 @@ nav{
     margin: 0;
 }
 li{
-    width: 30%;
+    width: 23%;
     text-align: center;
     padding: 7px;
     margin: auto;
@@ -70,11 +70,11 @@ button{
     transition-duration: 1s;
 }
 .changeColor:hover{
-    font-size: 1em;
+    font-size: 1.3em;
     border: solid lightcoral;
 }
-.gameButton{
-
+#submitScore, #submitLevel{
+    display: none;
 }
 
 #navBar{
@@ -93,11 +93,14 @@ button{
   margin-left: 35%;
   cursor: pointer;
 }
+#logOut > form > input{
+    display: none;
+}
 #gameName{
     color: chartreuse;
     padding-top: 7%;
 }
-#userName, #highScore, #logOut{
+#userName, #score, #logOut, #level{
     float: left;
 }
 
@@ -166,5 +169,20 @@ button{
     margin: 0 auto;
 }
 #mainGame{
+    display: none;
+}
+
+
+#continueGame{
+    color: orange;
+    font-size: 2em;
+    margin-top: 7%;
+    display: none;
+}
+
+#storyPart{
+    color: orange;
+    font-size: 2em;
+    margin-top: 5%;
     display: none;
 }

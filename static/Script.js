@@ -6,19 +6,43 @@ var counter = 0;
 var userCounter = 0;
 var takeInput = false;
 var interval = null;
-var level = null;
+var level = parseInt(document.querySelector("#submitLevel").innerHTML);
 var duration = 0.5;
 var notChnaged = true;
+var timesCorrect = 3;
+var currentTimesCorrect = parseInt(document.querySelector("#submitScore").innerHTML) / 5;
+var timesIncorrect = 0;
+var currentScore = parseInt(document.querySelector("#submitScore").innerHTML);
 
+var levelNumber = document.querySelector("#level");
+var score = document.querySelector("#score");
+var levelText = document.querySelector("#textLevel");
+var completedLevel = document.querySelector("#completed");
+var audio = document.querySelector("#myAudio");
+var story = document.querySelector("#storyPart");
+var inputScore = document.querySelector("#currentScore");
+inputScore.value = currentScore.toString();
+var inputLevel = document.querySelector("#currentLevel");
+inputLevel.value = level.toString();
+var button = document.querySelector("#hideButton");
+if(level === 1 && currentScore === 0)
+    button.style.display = "none";
 var context = new AudioContext();
 
 function removeOptions(){
     $("#gameOptions").fadeOut();
-    setTimeout(displayGame, 500);
+    if(level === 1 && currentScore === 0)
+        setTimeout(playStory, 500);
+    else
+        setTimeout(displayGame, 500);
 }
 function displayGame(){
     $("#mainGame").fadeIn();
     notChnaged = false;
+}
+function removeStory(){
+    $("#storyPart").fadeOut();
+    setTimeout(displayGame, 500);
 }
 
 $(document).ready(function(){
@@ -37,7 +61,6 @@ function selectColors(){
         return;
     randomCount.length = 0;
     soundFreq.length = 0;
-    level = 3;
     counter = 0;
     takeInput = false;
     userCounter = 0;
@@ -104,17 +127,63 @@ function getUserInput(event){
     if(idName === correctIdName){
         playOscillator(userCounter);
         userCounter += 1;
+        timesIncorrect = 0;
     }
     else{
-        playOscillator(userCounter);
+        audio.currentTime = 0;
+        audio.play();
         userCounter = 0;
-        window.alert("You entered an incorrect pattern");
+        timesIncorrect += 1;
+        takeInput = false;
     }
+    if(timesIncorrect === 3 && level !== 1){
+        level -= 1;
+        levelNumber.innerHTML = "Level: " + level.toString();
+        levelText.innerHTML = " " + level.toString();
+        completedLevel.innerHTML = " Failed ";
+        inputLevel.value = level;
+        inputScore.value = 0;
+        userCounter = 0;
+        takeInput = false;
+        timesIncorrect = 0;
+        currentTimesCorrect = 0;
+        currentScore = 0;
+        score.innerHTML = "Score: 0";
+        $("#mainGame").fadeOut();
+        setTimeout(displayLoader, 500);
+    }
+    else if(timesIncorrect === 3 && level === 1){
+        userCounter = 0;
+        takeInput = false;
+        timesIncorrect = 0;
+        currentTimesCorrect = 0;
+        currentScore = 0;
+        score.innerHTML = "Score: 0";
+        inputScore.value = 0;
+    }
+
     if(userCounter === level){
-        window.alert("You completed the level");
-        window.alert('Please play the game again');
         takeInput = false;
         userCounter = 0;
+        currentTimesCorrect += 1;
+        currentScore += 5;
+        score.innerHTML = "Score: " + currentScore;
+        inputScore.value = currentScore;
+        if(currentTimesCorrect === timesCorrect){
+            level += 1;
+            levelNumber.innerHTML = "Level: " + level.toString();
+            levelText.innerHTML = " " + level.toString();
+            inputLevel.value = level;
+            completedLevel.innerHTML = " Completed ";
+            currentTimesCorrect = 0;
+            currentScore = 0;
+            score.innerHTML = "Score: 0";
+            inputScore.value = 0;
+            timesIncorrect = 0;
+            userCounter = 0;
+            $("#mainGame").fadeOut();
+            setTimeout(displayLoader, 500);
+        }
     }
 }
 
@@ -151,4 +220,39 @@ function playOscillator(currentValue){
 
     oscillator_1.stop(startTime + duration);
     oscillator_2.stop(startTime + duration);
+}
+
+function displayLoader(){
+    $("#continueGame").fadeIn();
+    setTimeout(removeLoader, 1000);
+}
+function removeLoader(){
+    $("#continueGame").fadeOut();
+    setTimeout(displayGame, 500);
+}
+function playStory(){
+    $("#storyPart").fadeIn();
+    story.innerHTML = "One day a person found an amusing cube on the ground. He picked it up. Suddenly an old man appeared before him and promised him to make him rich if he beat him. With greed the person started playing."
+    setTimeout(removeStory, 10000);
+}
+
+function resetProgress(){
+    currentScore = 0;
+    currentTimesCorrect = 0;
+    level = 1;
+    timesIncorrect = 0;
+    takeInput = false;
+    inputLevel.value = "1";
+    inputScore.value = "0";
+    levelNumber.innerHTML = "Level: " + level.toString();
+    levelText.innerHTML = " " + level.toString();
+    score.innerHTML = "Score: 0";
+    removeOptions();
+}
+
+function customProgress(){
+    if(level === 1 && currentScore === 0)
+        removeOptions();
+    else
+        resetProgress();
 }

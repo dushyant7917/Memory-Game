@@ -9,14 +9,21 @@
     <body>
         <nav>
             <ul id="navBar">
-                <li id="userName" class="pointerChange">{{ session['username'] }}</li>
-                <li id="highScore"> High Score: 0 </li>
+                <li id="userName" class="pointerChange"> {{session['username']}} </li>
+                <li id="score"> Score: {{session['score']}} </li>
+                <li id="level"> Level: {{session['level']}} </li>
                 <li id="logOut" class="pointerChange">
                     <form method=POST action="{{ url_for('logout') }}">
+                        <input type="number" name="current_score" id="currentScore"/>
+                        <input type="number" name="current_level" id="currentLevel"/>
                         <button type="submit" id="logOut">Logout</button>
                     </form>
+                    <div id="submitScore"> {{session['score']}} </div>
+                    <div id="submitLevel"> {{session['level']}} </div>
                 </li>
             </ul>
+            <audio src="../static/Wrong_1.mp3" id="myAudio">
+            </audio>
         </nav>
 
         <div id="gameName">
@@ -25,9 +32,8 @@
 
         <div id="gameOptions">
             <ul id="optionList">
-                <li class="pointerChange changeColor" onclick="removeOptions()"> PLAY GAME </li>
-                <li class="pointerChange changeColor"> QUIT </li>
-                <li class="pointerChange changeColor"> RESET YOUR PROGRESS </li>
+                <li class="pointerChange changeColor" onclick="customProgress()"> PLAY NEW GAME </li>
+                <li class="pointerChange changeColor" id="hideButton" onclick="removeOptions()"> CONTINUE </li>
             </ul>
         </div>
 
@@ -55,8 +61,20 @@
                 </table>
             </div>
             <div class="buttonHolder">
-                <button onclick="selectColors()" class="gameButton"> Reset </button>
+                <button onclick="selectColors()" class="gameButton"> Replay </button>
             </div>
+        </div>
+
+        <div id="continueGame">
+            <div id="contentArea">
+                You <span id="completed"> Completed </span> The Level. Loading Level <span id="textLevel"> 1 </span>
+                <br>
+                <br>
+                Please wait... 
+            </div>
+        </div>
+
+        <div id="storyPart">
         </div>
     </body>
     <script src="/static/Script.js"></script>
