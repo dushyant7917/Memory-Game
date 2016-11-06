@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title> Memory Game!!! </title>
+        <link rel="stylesheet" href="/static/Style.css"/>
+        <script src="/static/jquery-2.2.3.js"></script>
+    </head>
+    <body>
+        <nav>
+            <ul id="navBar">
+                <li id="userName" class="pointerChange"> {{session['username']}} </li>
+                <li id="score"> Score: {{session['score']}} </li>
+                <li id="level"> Level: {{session['level']}} </li>
+                <li id="logOut" class="pointerChange">
+                    <form method=POST action="{{ url_for('logout') }}">
+                        <input type="number" name="current_score" id="currentScore"/>
+                        <input type="number" name="current_level" id="currentLevel"/>
+                        <button type="submit" id="logOut">Logout</button>
+                    </form>
+                    <div id="submitScore"> {{session['score']}} </div>
+                    <div id="submitLevel"> {{session['level']}} </div>
+                </li>
+            </ul>
+            <audio src="../static/Wrong_1.mp3" id="myAudio">
+            </audio>
+        </nav>
+
+        <div id="gameName">
+            <h1> Memory Game. Test How much you are able to remember. For NO use at all. </h1>
+        </div>
+
+        <div id="gameOptions">
+            <ul id="optionList">
+                <li class="pointerChange changeColor" onclick="customProgress()"> PLAY NEW GAME </li>
+                <li class="pointerChange changeColor" id="hideButton" onclick="removeOptions()"> CONTINUE </li>
+            </ul>
+        </div>
+
+        <div id="mainGame">
+            <div class="buttonHolder">
+                <button onclick="selectColors()" class="gameButton"> Play </button>
+            </div>
+            <div id="gameHolder">
+                <table>
+                    <tr>
+                        <td id="box_1" class="colorBox" onclick="getUserInput(event)" onmousedown="reduceOpacity(event)" onmouseup="increaseOpacity(event)"></td>
+                        <td id="box_2" class="colorBox" onclick="getUserInput(event)" onmousedown="reduceOpacity(event)" onmouseup="increaseOpacity(event)"></td>
+                        <td id="box_3" class="colorBox" onclick="getUserInput(event)" onmousedown="reduceOpacity(event)" onmouseup="increaseOpacity(event)"></td>
+                    </tr>
+                    <tr>
+                        <td id="box_4" class="colorBox" onclick="getUserInput(event)" onmousedown="reduceOpacity(event)" onmouseup="increaseOpacity(event)"></td>
+                        <td id="box_5" class="colorBox" onclick="getUserInput(event)" onmousedown="reduceOpacity(event)" onmouseup="increaseOpacity(event)"></td>
+                        <td id="box_6" class="colorBox" onclick="getUserInput(event)" onmousedown="reduceOpacity(event)" onmouseup="increaseOpacity(event)"></td>
+                    </tr>
+                    <tr>
+                        <td id="box_7" class="colorBox" onclick="getUserInput(event)" onmousedown="reduceOpacity(event)" onmouseup="increaseOpacity(event)"></td>
+                        <td id="box_8" class="colorBox" onclick="getUserInput(event)" onmousedown="reduceOpacity(event)" onmouseup="increaseOpacity(event)"></td>
+                        <td id="box_9" class="colorBox" onclick="getUserInput(event)" onmousedown="reduceOpacity(event)" onmouseup="increaseOpacity(event)"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="buttonHolder">
+                <button onclick="selectColors()" class="gameButton"> Replay </button>
+            </div>
+        </div>
+
+        <div id="continueGame">
+            <div id="contentArea">
+                You <span id="completed"> Completed </span> The Level. Loading Level <span id="textLevel"> 1 </span>
+                <br>
+                <br>
+                Please wait... 
+            </div>
+        </div>
+
+        <div id="storyPart">
+        </div>
+    </body>
+    <script src="/static/Script.js"></script>
+</html>
