@@ -1,0 +1,65 @@
+body{
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    cursor: default;
+    font-family: AR DESTINE;
+    overflow: auto;
+    transition-duration: 1s;
+    text-align: center;
+    background: url('background1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+div{
+    left: 0;
+    width: 100%;
+    overflow: auto;
+    text-align: center;
+    margin: 0;
+}
+nav{
+    background: black;
+    color: white;
+    padding: 0;
+    margin: 0;
+    font-size: 3em;
+}
+form{
+    overflow: auto;
+}
+input{
+    width: 350px;
+    border: none;
+    height: 30px;
+    border-radius: 5px;
+    font-size: 1.5em;
+    font-family: AR DESTINE;
+    padding: 3px;
+}
+
+.container{
+    margin-top: 10%;
+}
+.inputLabel{
+    padding: 20px 40px;
+    font-size: 2em;
+}
+#submitButton{
+    margin-top: 2%;
+    font-size: 2em;
+    background: transparent;
+    padding: 10px;
+    border: none;
+    font-family: AR DESTINE;
+    transition-duration: 1s;
+    border: solid black;
+    border-radius: 20px;
+    cursor: pointer;
+    color: black;
+}
+#submitButton:hover{
+    background: black;
+    color: gold;
+}
