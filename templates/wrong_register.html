@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Registration Form</title>
+
+
+
+      <link rel="stylesheet" href="/static/login.css">
+
+
+</head>
+
+<body>
+  <body>
+
+    <img src="/static/logo.png"></img>
+
+	<div class="login">
+		<div class="login-screen">
+			<div class="app-title">
+				<h1>Register</h1>
+			</div>
+
+			<div class="login-form">
+
+        <form method=POST action="{{ url_for('register') }}">
+				<div class="control-group">
+				<input type="text" class="login-field" value="" placeholder="username" name="username" required>
+				<label class="login-field-icon fui-user" for="login-name"></label>
+				</div>
+
+				<div class="control-group">
+				<input type="password" class="login-field" value="" placeholder="password" name="pass" required>
+				<label class="login-field-icon fui-lock" for="login-pass"></label>
+				</div>
+
+        <div class="flashes">
+          {{ get_flashed_messages()[0] }}
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-large btn-block">Register</button>
+				</form>
+
+      </div>
+
+    </div>
+	</div>
+</body>
+
+
+</body>
+</html>
