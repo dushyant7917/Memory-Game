@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template, url_for, request, session, redirect, flash, Markup
 from flask.ext.pymongo import PyMongo
 import bcrypt
@@ -5,7 +6,7 @@ import bcrypt
 app = Flask(__name__)
 
 app.config['MONGO_DBNAME'] = 'colour_game'
-app.config['MONGO_URI'] = 'mongodb://localhost:27017/colour_game'
+app.config['MONGO_URI'] = 'mongodb://dushyant7917:abc123@ds149207.mlab.com:49207/colour_game'
 
 mongo = PyMongo(app)
 
@@ -20,12 +21,9 @@ def index():
 
 @app.route("/logout", methods = ['POST'])
 def logout():
-    print "86878"
     current_score = request.form['current_score']
     current_level = request.form['current_level']
-    print "57578"
     users = mongo.db.users
-    print current_score + current_level
     users.update({'_id': session['username']}, {'$set': {'score': current_score, 'level': current_level}})
     session.clear()
     return redirect(url_for('index'))
@@ -72,4 +70,5 @@ def register():
 
 if __name__ == '__main__':
     app.secret_key = 'dushyant7917'
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
