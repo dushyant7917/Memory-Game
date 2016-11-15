@@ -26,7 +26,7 @@ def logout():
     current_level = request.form['current_level']
     users = mongo.db.users
     users.update({'_id': session['username']}, {'$set': {'score': current_score, 'level': current_level}})
-    session.clear()
+    session.pop('username', None)
     return redirect(url_for('index'))
 
 

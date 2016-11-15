@@ -10,10 +10,11 @@ var level = parseInt(document.querySelector("#submitLevel").innerHTML);
 var duration = 0.5;
 var notChnaged = true;
 var timesCorrect = 3;
-var currentTimesCorrect = parseInt(document.querySelector("#submitScore").innerHTML) / 5;
+var currentTimesCorrect = (parseInt(document.querySelector("#submitScore").innerHTML) - (level - 1) * 15) / 5;
 var timesIncorrect = 0;
 var currentScore = parseInt(document.querySelector("#submitScore").innerHTML);
 
+var playerProgress = $("#progressReport");
 var levelNumber = document.querySelector("#level");
 var score = document.querySelector("#score");
 var levelText = document.querySelector("#textLevel");
@@ -28,6 +29,8 @@ var button = document.querySelector("#hideButton");
 if(level === 1 && currentScore === 0)
     button.style.display = "none";
 var context = new AudioContext();
+var volume = context.createGain();
+
 
 function removeOptions(){
     $("#gameOptions").fadeOut();
@@ -43,6 +46,16 @@ function displayGame(){
 function removeStory(){
     $("#storyPart").fadeOut();
     setTimeout(displayGame, 500);
+}
+function customProgress(){
+    if(level === 1 && currentScore === 0)
+        removeOptions();
+    else
+        resetProgress(0);
+}
+function displayProgress(){
+    playerProgress.fadeTo(500, 1);
+    playerProgress.delay(500).fadeTo(500, 0);
 }
 
 $(document).ready(function(){
@@ -127,7 +140,6 @@ function getUserInput(event){
     if(idName === correctIdName){
         playOscillator(userCounter);
         userCounter += 1;
-        timesIncorrect = 0;
     }
     else{
         audio.currentTime = 0;
@@ -135,6 +147,10 @@ function getUserInput(event){
         userCounter = 0;
         timesIncorrect += 1;
         takeInput = false;
+        if(timesIncorrect !== 3){
+            playerProgress.html("Wrong answer!!! Play carefully else you'll loose points...");
+            displayProgress();
+        }
     }
     if(timesIncorrect === 3 && level !== 1){
         level -= 1;
@@ -142,13 +158,13 @@ function getUserInput(event){
         levelText.innerHTML = " " + level.toString();
         completedLevel.innerHTML = " Failed ";
         inputLevel.value = level;
-        inputScore.value = 0;
         userCounter = 0;
         takeInput = false;
         timesIncorrect = 0;
         currentTimesCorrect = 0;
-        currentScore = 0;
-        score.innerHTML = "Score: 0";
+        currentScore = (0 > currentScore - 15)? 0: currentScore - 15;
+        score.innerHTML = "Score: " + currentScore;
+        inputScore.value = currentScore;
         $("#mainGame").fadeOut();
         setTimeout(displayLoader, 500);
     }
@@ -160,9 +176,12 @@ function getUserInput(event){
         currentScore = 0;
         score.innerHTML = "Score: 0";
         inputScore.value = 0;
+        playerProgress.html("Aww...  You failed three times! Level decreased by one...");
+        displayProgress();
     }
-
+    
     if(userCounter === level){
+        timesIncorrect = 0;
         takeInput = false;
         userCounter = 0;
         currentTimesCorrect += 1;
@@ -176,13 +195,14 @@ function getUserInput(event){
             inputLevel.value = level;
             completedLevel.innerHTML = " Completed ";
             currentTimesCorrect = 0;
-            currentScore = 0;
-            score.innerHTML = "Score: 0";
-            inputScore.value = 0;
             timesIncorrect = 0;
             userCounter = 0;
             $("#mainGame").fadeOut();
             setTimeout(displayLoader, 500);
+        }
+        else{
+            playerProgress.html("Right answer!!! Press play button to play again...")
+            displayProgress();
         }
     }
 }
@@ -203,7 +223,6 @@ function playOscillator(currentValue){
     var startTime = context.currentTime;
     var oscillator_1 = context.createOscillator();
     var oscillator_2 = context.createOscillator();
-    var volume = context.createGain();
     oscillator_1.type = "sawtooth";
     oscillator_2.type = "sawtooth";
 
@@ -232,11 +251,11 @@ function removeLoader(){
 }
 function playStory(){
     $("#storyPart").fadeIn();
-    story.innerHTML = "Get ready to test your memory! "
+    story.innerHTML = "Get ready to test your memory!"
     setTimeout(removeStory, 3000);
 }
 
-function resetProgress(){
+function resetProgress(value){
     currentScore = 0;
     currentTimesCorrect = 0;
     level = 1;
@@ -247,12 +266,6 @@ function resetProgress(){
     levelNumber.innerHTML = "Level: " + level.toString();
     levelText.innerHTML = " " + level.toString();
     score.innerHTML = "Score: 0";
-    removeOptions();
-}
-
-function customProgress(){
-    if(level === 1 && currentScore === 0)
+    if(value === 0)
         removeOptions();
-    else
-        resetProgress();
 }
