@@ -204,6 +204,13 @@ button{
     height: 100%;
 }
 
+#progressReport{
+    margin-bottom: 3%;
+    color: orange;
+    font-size: 1.2em;
+    display: block;
+    opacity: 0;
+}
 
 #continueGame{
     color: orange;

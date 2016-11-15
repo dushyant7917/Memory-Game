@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title> Memory Game!!! </title>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="/static/Style.css"/>
-        <link rel="shortcut icon" type="image/x-icon" href="/static/Icon.ico"/>
-        <script src="/static/jquery-2.2.3.js"></script>
+        <title> Memory Game!!! </title>
+        <link rel="stylesheet" href="../static/Style.css"/>
+        <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet"/>
+        <link rel="shortcut icon" type="image/x-icon" href="../static/Icon.ico"/>
+        <script src="../static/jquery-2.2.3.js"></script>
     </head>
     <body>
         <nav>
@@ -28,7 +29,7 @@
         </nav>
 
         <div id="gameName">
-            <h1> Memory Game... Test your memory!</h1>
+            <h1> Memory Game. Test How much you are able to remember.</h1>
         </div>
 
         <div id="gameOptions">
@@ -43,6 +44,9 @@
                 <button onclick="selectColors()" class="gameButton"> Play </button>
             </div>
             <div id="gameHolder">
+                <div id="progressReport">
+                    Blah Blah Blah...
+                </div>
                 <table>
                     <tr>
                         <td id="box_1" class="colorBox" onclick="getUserInput(event)" onmousedown="reduceOpacity(event)" onmouseup="increaseOpacity(event)"></td>
@@ -62,7 +66,7 @@
                 </table>
             </div>
             <div class="buttonHolder">
-                <button onclick="selectColors()" class="gameButton"> Replay </button>
+                <button onclick="resetProgress(1)" class="gameButton"> Reset Game </button>
             </div>
         </div>
 
@@ -72,11 +76,12 @@
                 <br>
                 <br>
                 Please wait...
+                <br>
             </div>
         </div>
 
         <div id="storyPart">
         </div>
+        <script src="../static/Script.js"></script>
     </body>
-    <script src="/static/Script.js"></script>
 </html>
