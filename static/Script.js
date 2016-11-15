@@ -232,8 +232,8 @@ function removeLoader(){
 }
 function playStory(){
     $("#storyPart").fadeIn();
-    story.innerHTML = "One day a person found an amusing cube on the ground. He picked it up. Suddenly an old man appeared before him and promised him to make him rich if he beat him. With greed the person started playing."
-    setTimeout(removeStory, 10000);
+    story.innerHTML = "Get ready to test your memory! "
+    setTimeout(removeStory, 3000);
 }
 
 function resetProgress(){
