@@ -2,7 +2,6 @@ body{
     width: 100%;
     padding: 0;
     margin: 0;
-    height: auto;
     cursor: default;
     font-family: AR DESTINE;
     overflow: auto;
@@ -11,12 +10,14 @@ body{
     background: url('background.jpg');
     background-size: cover;
     background-repeat: no-repeat;
+    height: 100%;
 }
 div{
     left: 0;
     width: 100%;
     overflow: auto;
     text-align: center;
+    height: 100%;
 }
 nav{
     background: black;
@@ -24,6 +25,7 @@ nav{
     font-size: 2em;
     padding: 0;
     margin: 0;
+    height: 100%;
 }
 li{
     width: 23%;
@@ -37,6 +39,7 @@ ul{
     padding: 0;
     margin: 0;
     list-style-type: none;
+    height: 100%;
 }
 a{
     text-decoration: none;
@@ -44,6 +47,7 @@ a{
 form{
   overflow: auto;
   text-align: center;
+  height: 100%;
 }
 button{
   background: transparent;
@@ -59,27 +63,33 @@ button{
     border-radius: 15px;
     transition-duration: 1s;
     cursor: pointer;
+    height: 100%;
 }
 .gameButton:hover{
     color: darkblue;
     background: orange;
+    height: 100%;
 }
 .pointerChange{
     cursor: pointer;
     padding: 10px;
     transition-duration: 1s;
+    height: 100%;
 }
 .changeColor:hover{
     font-size: 1.3em;
     border: solid lightcoral;
+    height: 100%;
 }
 #submitScore, #submitLevel{
     display: none;
+    height: 100%;
 }
 
 #navBar{
     width: 100%;
     overflow: auto;
+    height: 100%;
 }
 #logOut{
   font-size: 1em;
@@ -88,88 +98,110 @@ button{
   border: none;
   position: relative;
   margin: 0 auto;
+  height: 100%;
 }
 #logOut > form > button{
   margin-left: 35%;
   cursor: pointer;
+  height: 100%;
 }
 #logOut > form > input{
     display: none;
+    height: 100%;
 }
 #gameName{
     color: chartreuse;
     padding-top: 7%;
+    height: 100%;
 }
 #userName, #score, #logOut, #level{
     float: left;
+    height: 100%;
 }
 
 #mainGame > div{
     float: left;
+    height: 100%;
 }
 #gameOptions{
     margin-top: 7%;
     display: block;
+    height: 100%;
 }
 #optionList{
     width: 60%;
     margin: 0 auto;
     font-size: 2em;
     color: orange;
+    height: 100%;
 }
 #optionList > li{
     width: 100%;
+    height: 100%;
 }
 .buttonHolder{
     width: 20%;
+    height: 100%;
 }
 
 #box_1{
     background: red;
+    height: 100%;
 }
 #box_2{
     background: lightseagreen;
+    height: 100%;
 }
 #box_3{
     background: brown;
+    height: 100%;
 }
 #box_4{
     background: seagreen;
+    height: 100%;
 }
 #box_5{
     background: purple;
+    height: 100%;
 }
 #box_6{
     background: grey;
+    height: 100%;
 }
 #box_7{
     background: yellow;
 }
 #box_8{
     background: darkblue;
+    height: 100%;
 }
 #box_9{
     background: deeppink;
+    height: 100%;
 }
 .colorBox{
     width: 100px;
-    height: 100px;
+    height: 100%;
     opacity: 0.5;
     cursor: pointer;
 }
 #mainGame{
     margin-top: 7%;
+    height: 100%;
 }
 #gameHolder{
     width: 60%;
     margin: 0 auto;
     text-align: center;
+    height: 100%;
 }
 #gameHolder > table{
     margin: 0 auto;
+    height: 100%;
 }
 #mainGame{
     display: none;
+    height: 100%;
 }
 
 
@@ -178,6 +210,7 @@ button{
     font-size: 2em;
     margin-top: 7%;
     display: none;
+    height: 100%;
 }
 
 #storyPart{
@@ -185,4 +218,5 @@ button{
     font-size: 2em;
     margin-top: 5%;
     display: none;
+    height: 100%;
 }
