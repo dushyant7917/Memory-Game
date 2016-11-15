@@ -14,7 +14,6 @@ var currentTimesCorrect = parseInt(document.querySelector("#submitScore").innerH
 var timesIncorrect = 0;
 var currentScore = parseInt(document.querySelector("#submitScore").innerHTML);
 
-var playerProgress = $("#progressReport");
 var levelNumber = document.querySelector("#level");
 var score = document.querySelector("#score");
 var levelText = document.querySelector("#textLevel");
@@ -30,7 +29,6 @@ if(level === 1 && currentScore === 0)
     button.style.display = "none";
 var context = new AudioContext();
 
-
 function removeOptions(){
     $("#gameOptions").fadeOut();
     if(level === 1 && currentScore === 0)
@@ -45,16 +43,6 @@ function displayGame(){
 function removeStory(){
     $("#storyPart").fadeOut();
     setTimeout(displayGame, 500);
-}
-function customProgress(){
-    if(level === 1 && currentScore === 0)
-        removeOptions();
-    else
-        resetProgress();
-}
-function displayProgress(){
-    playerProgress.fadeTo(500, 1);
-    playerProgress.delay(500).fadeTo(500, 0);
 }
 
 $(document).ready(function(){
@@ -139,6 +127,7 @@ function getUserInput(event){
     if(idName === correctIdName){
         playOscillator(userCounter);
         userCounter += 1;
+        timesIncorrect = 0;
     }
     else{
         audio.currentTime = 0;
@@ -146,10 +135,6 @@ function getUserInput(event){
         userCounter = 0;
         timesIncorrect += 1;
         takeInput = false;
-        if(timesIncorrect !== 3){
-            playerProgress.html("You're wrong. Play carefully else you'll loose 15 points...");
-            displayProgress();
-        }
     }
     if(timesIncorrect === 3 && level !== 1){
         level -= 1;
@@ -157,13 +142,13 @@ function getUserInput(event){
         levelText.innerHTML = " " + level.toString();
         completedLevel.innerHTML = " Failed ";
         inputLevel.value = level;
+        inputScore.value = 0;
         userCounter = 0;
         takeInput = false;
         timesIncorrect = 0;
         currentTimesCorrect = 0;
-        currentScore = (0 > currentScore - 15)? 0: currentScore - 15;
-        score.innerHTML = "Score: " + currentScore;
-        inputScore.value = currentScore;
+        currentScore = 0;
+        score.innerHTML = "Score: 0";
         $("#mainGame").fadeOut();
         setTimeout(displayLoader, 500);
     }
@@ -175,12 +160,9 @@ function getUserInput(event){
         currentScore = 0;
         score.innerHTML = "Score: 0";
         inputScore.value = 0;
-        playerProgress.html("Aww. You failed 3 times in a row. We don't judge people in level 1 harshly");
-        displayProgress();
     }
-    
+
     if(userCounter === level){
-        timesIncorrect = 0;
         takeInput = false;
         userCounter = 0;
         currentTimesCorrect += 1;
@@ -194,14 +176,13 @@ function getUserInput(event){
             inputLevel.value = level;
             completedLevel.innerHTML = " Completed ";
             currentTimesCorrect = 0;
+            currentScore = 0;
+            score.innerHTML = "Score: 0";
+            inputScore.value = 0;
             timesIncorrect = 0;
             userCounter = 0;
             $("#mainGame").fadeOut();
             setTimeout(displayLoader, 500);
-        }
-        else{
-            playerProgress.html("You're correct!!! Click play to play again...")
-            displayProgress();
         }
     }
 }
@@ -267,4 +248,11 @@ function resetProgress(){
     levelText.innerHTML = " " + level.toString();
     score.innerHTML = "Score: 0";
     removeOptions();
+}
+
+function customProgress(){
+    if(level === 1 && currentScore === 0)
+        removeOptions();
+    else
+        resetProgress();
 }

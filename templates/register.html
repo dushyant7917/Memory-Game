@@ -1,23 +1,54 @@
-<script src="/static/ckeditor/ckeditor.js"></script>
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Registration Form</title>
+
+
+
+      <link rel="stylesheet" href="/static/login.css">
+
+
+</head>
 
 <body>
+  <body>
 
-<form method="POST" action="{{url_for('addBlog')}}">
+    <img src="/static/logo.png"></img>
 
-  <textarea name="editor1" id="editor1">Initial editor content.</textarea>
+	<div class="login">
+		<div class="login-screen">
+			<div class="app-title">
+				<h1>Register</h1>
+			</div>
 
-  <script>
-    CKEDITOR.replace('editor1');
-  </script>
+			<div class="login-form">
 
-  <button type="submit">Submit</button>
+        <form method=POST action="{{ url_for('register') }}">
+				<div class="control-group">
+				<input type="text" class="login-field" value="" placeholder="username" name="username" required>
+				<label class="login-field-icon fui-user" for="login-name"></label>
+				</div>
 
-</form>
+				<div class="control-group">
+				<input type="password" class="login-field" value="" placeholder="password" name="pass" required>
+				<label class="login-field-icon fui-lock" for="login-pass"></label>
+				</div>
 
-<form method=GET action="{{url_for('blog')}}">
-    <button type="submit">Cancel</button>
-</form>
+        <div class="flashes">
+          {{ get_flashed_messages()[0] }}
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-large btn-block">Register</button>
+          <a class="login-link" href="{{ url_for('index') }}">Back to login</a>
+				</form>
+
+      </div>
+
+    </div>
+	</div>
+</body>
 
 
 </body>
-
+</html>
