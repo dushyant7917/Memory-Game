@@ -54,8 +54,8 @@ function customProgress(){
         resetProgress(0);
 }
 function displayProgress(){
-    playerProgress.fadeTo(500, 1);
-    playerProgress.delay(500).fadeTo(500, 0);
+    playerProgress.fadeTo(1000, 1);
+    playerProgress.delay(1000).fadeTo(1000, 0);
 }
 
 $(document).ready(function(){
@@ -148,7 +148,7 @@ function getUserInput(event){
         timesIncorrect += 1;
         takeInput = false;
         if(timesIncorrect !== 3){
-            playerProgress.html("Wrong answer!!! Play carefully else you'll loose points...");
+            playerProgress.html("Wrong answer!!! Play carefully...");
             displayProgress();
         }
     }
@@ -176,7 +176,7 @@ function getUserInput(event){
         currentScore = 0;
         score.innerHTML = "Score: 0";
         inputScore.value = 0;
-        playerProgress.html("Aww...  You failed three times! Level decreased by one...");
+        playerProgress.html("Aww... You failed 3 times in a row!!! Level decreased by 1");
         displayProgress();
     }
     
@@ -251,7 +251,7 @@ function removeLoader(){
 }
 function playStory(){
     $("#storyPart").fadeIn();
-    story.innerHTML = "Get ready to test your memory!"
+    story.innerHTML = "Lets test your memory!!!"
     setTimeout(removeStory, 3000);
 }
 
