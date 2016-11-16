@@ -6,8 +6,12 @@ import bcrypt
 app = Flask(__name__)
 
 app.config['MONGO_DBNAME'] = 'colour_game'
+<<<<<<< HEAD
 app.config['MONGO_URI'] = 'mongodb://dushyant7917:abc123@ds149207.mlab.com:49207/colour_game'
 # app.config['MONGO_URI'] = 'mongodb://localhost:27017/colour_game'
+=======
+app.config['MONGO_URI'] = 'mongodb://dushyant7917:abc123>@ds149207.mlab.com:49207/colour_game'
+>>>>>>> 4ebd266aeaaf914ef12c45a2986451212cb7f992
 
 mongo = PyMongo(app)
 
