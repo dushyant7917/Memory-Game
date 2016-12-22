@@ -71,6 +71,6 @@ def register():
 
 
 if __name__ == '__main__':
-    app.secret_key = 'dushyant7917'
+    app.secret_key = 'some secret key'
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
